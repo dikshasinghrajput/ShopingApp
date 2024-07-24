@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shoppingapp/pages/home.dart';
-import 'package:shoppingapp/pages/onboarding.dart';
+import 'package:shoppingapp/pages/login.dart';
+
+import 'package:shoppingapp/pages/product_details.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +20,6 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: Home());
+        home: Login());
   }
 }
