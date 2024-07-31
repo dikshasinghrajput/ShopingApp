@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shoppingapp/pages/buttomnav.dart';
 import 'package:shoppingapp/pages/login.dart';
 import 'package:shoppingapp/widget/support_widget.dart';
 
@@ -28,6 +29,8 @@ class _SignupState extends State<Signup> {
               "Registered Succesfully",
               style: TextStyle(fontSize: 20.0),
             )));
+           
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Buttomnav()));
       } on FirebaseException catch (e) {
         if (e.code == 'weak-password') {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -128,6 +131,7 @@ class _SignupState extends State<Signup> {
                         color: Color(0xFFF4F5F9),
                         borderRadius: BorderRadius.circular(10)),
                     child: TextFormField(
+                      obscureText: true,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please Enter your Password';
