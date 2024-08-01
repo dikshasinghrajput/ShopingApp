@@ -133,6 +133,7 @@ class _MyWidgetState extends State<Login> {
                           email = mailcontroller.text;
                           password = passwordcontroller.text;
                         }));
+                      userLogin();
                     },
                     child: Center(
                       child: Container(

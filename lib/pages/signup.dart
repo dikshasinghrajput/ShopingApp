@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:random_string/random_string.dart';
 import 'package:shoppingapp/pages/buttomnav.dart';
 import 'package:shoppingapp/pages/login.dart';
+import 'package:shoppingapp/services/database.dart';
+import 'package:shoppingapp/services/shared_pref.dart';
 import 'package:shoppingapp/widget/support_widget.dart';
 
 class Signup extends StatefulWidget {
@@ -29,8 +32,22 @@ class _SignupState extends State<Signup> {
               "Registered Succesfully",
               style: TextStyle(fontSize: 20.0),
             )));
-           
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>Buttomnav()));
+        String Id = randomAlphaNumeric(10);
+        await SharedPreferenceHelper().saveUserEmail(mailcontroller.text);
+        await SharedPreferenceHelper().saveUserId(Id);
+        await SharedPreferenceHelper().saveUserName(namecontroller.text);
+        await SharedPreferenceHelper().saveUserImage("images/images.png");
+
+        Map<String, dynamic> userInfoMap = {
+          "Name": namecontroller.text,
+          "Email": mailcontroller.text,
+          "Id": Id,
+          "Image": "images/images.png"
+        };
+        await DatabaseMethods().addUserDetails(userInfoMap, Id);
+
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Buttomnav()));
       } on FirebaseException catch (e) {
         if (e.code == 'weak-password') {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
